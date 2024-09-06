@@ -1,145 +1,130 @@
-const $ = new Env('饿了么食神客栈');
 const {
-        validateCarmeWithType: validateCarmeWithType,
-        getCookies: getCookies,
-        getUserInfoWithX: getUserInfoWithX,
-        wait: wait,
-        tryCatchPromise: tryCatchPromise,
-        checkCk: checkCk
-    } = require("./common.js"),
-    _0x286a61 = require("request"),
-    _0x127a18 = process.env.ELE_CARME,
-    _0x5210b0 = 23,
-    _0x3d6440 = require("md5");
-
-function _0x1a523b (_0x10b6c8) {
-    if (!_0x10b6c8) {
-        return "-1";
+    validateCarmeWithType: _0xd12380,
+    commonRequest: _0x5da2a0,
+    getCookies: _0x14503f,
+    getUserInfoWithX: _0x1c9f9d,
+    getUserInfo: getUserInfo,
+    wait: _0x1e0e6b,
+    tryCatchPromise: _0x358f23,
+    checkCk: _0x507b71,
+    getToken
+  } = require("./common.js"),
+  md5 = require("md5"),
+  _0x34af9d = require("request"),
+  _0x1b471c = process.env.ELE_CARME,
+  HOST = process.env.HOST || "http://192.168.100.234:3750/script-auth",
+  _0x24ea83 = 3,
+  _0xa09546 = require("crypto");
+async function _0x2ba1e4(_0x87a808) {
+  let _0x56f9d2 = {
+      missionCollectionId: "894",
+      locationInfos: "[\"{\\\"lng\\\":\\\"120.21993197500706\\\",\\\"lat\\\":\\\"30.178378857672215\\\"}\"]",
+      bizScene: "SSKZ",
+      instance: "INNER"
+    },
+    _0x188fce = "mtop.ele.biz.growth.task.core.querytask";
+  try {
+    const _0x196558 = await _0x5da2a0(_0x87a808, JSON.stringify(_0x56f9d2), _0x188fce, _0x24ea83, "", process.env.x5sec);
+    if (_0x196558.data) {
+      return _0x196558.data.mlist;
     }
-
-    for (var _0x12eabb = _0x10b6c8.split(";"), _0x406903 = 0; _0x406903 < _0x12eabb.length; _0x406903++) {
-        var _0x450595 = _0x12eabb[_0x406903].split("=");
-
-        if ([" _m_h5_tk", "_m_h5_tk"].includes(_0x450595[0])) {
-            return _0x450595[1];
-        }
-    }
-
-    return "-1";
+  } catch (_0x1a7101) {
+    return null;
+  }
 }
-
-const _0x5cf4f4 = async (_0x2bc6f9, _0x1c444f, _0x42b574 = 5) => {
-    const _0x255e82 = _0x1a523b(_0x2bc6f9),
-        _0x192a0b = _0x255e82.split("_")[0];
-
-    return _0x3d6440(_0x192a0b + _0x1c444f);
-};
-
-async function _0x389e0e (_0x46c612, _0x150ab1) {
-    const _0x4dfa75 = {
-            "authority": "shopping.ele.me",
-            "accept": "application/json",
-            "cache-control": "no-cache",
-            "content-type": "application/x-www-form-urlencoded",
-            "cookie": _0x46c612,
-            "x-miniapp-id-taobao": "3000000091262411",
-            "x-miniapp-version": "0.0.116",
-            "x-mini-appkey": "34416858",
-            "x-req-appkey": "34416858",
-            "appid": "3000000091262411"
-        },
-        _0x303357 = new Date().getTime(),
-        _0x46d5fd = 34190632,
-        _0xb1a4b3 = "data=" + encodeURIComponent(JSON.stringify(_0x150ab1)),
-        _0x529b7d = await _0x5cf4f4(_0x46c612, "&" + _0x303357 + "&" + _0x46d5fd + "&" + JSON.stringify(_0x150ab1), _0x127a18),
-        _0x2737f2 = {
-            "url": "https://shopping.ele.me/h5/mtop.miniapp.cloud.application.request/1.0/?jsv=2.6.1&appKey=34190632&t=" + _0x303357 + "&sign=" + _0x529b7d + "&api=mtop.miniapp.cloud.application.request&v=1.0&type=originaljson&ttid=1608030065155%40eleme_android_11.0.38",
-            "method": "POST",
-            "headers": _0x4dfa75,
-            "body": _0xb1a4b3
-        };
-
-    return tryCatchPromise(_0x712b47 => {
-        _0x286a61(_0x2737f2, async (_0x2ad7cf, _0x12230a, _0x4bc800) => {
-            if (!_0x2ad7cf && _0x12230a.statusCode === 200) {
-                try {
-                    const _0x18c432 = JSON.parse(_0x4bc800);
-
-                    _0x712b47(_0x18c432.data.data);
-                } catch (_0x24a035) {
-                    console.log(_0x4bc800);
-
-                    _0x712b47(null);
-                }
-            } else {
-                _0x712b47(null);
-            }
-        });
-    });
+async function _0x56dea5(_0x589b7c, _0x10e2ad, _0x4b4d9b, _0x447c6b) {
+  const _0xfebe66 = {
+    collectionId: _0x4b4d9b,
+    missionId: _0x10e2ad,
+    actionCode: "PAGEVIEW",
+    pageFrom: _0x447c6b,
+    viewTime: "15",
+    bizScene: "SSKZ",
+    accountPlan: "KB_ORCHARD",
+    sync: "false"
+  };
+  return await _0x5da2a0(_0x589b7c, JSON.stringify(_0xfebe66), "mtop.ele.biz.growth.task.event.pageview", _0x24ea83, "", process.env.x5sec);
 }
-
-async function _0x457235 (_0x3e73c2, _0x41297f, _0x18d496) {
-    const _0x2f8479 = {
-            "accept": "application/json",
-            "cache-control": "no-cache",
-            "content-type": "application/json",
-            "cookie": _0x3e73c2,
-            "User-Agent": "okhttp/3.14.9",
-            "Host": "sskz.gzppxia.com",
-            "startToken": "150483272097295"
-        },
-        _0x3d6fd6 = {
-            "url": "https://sskz.gzppxia.com/" + _0x18d496,
-            "method": "POST",
-            "headers": _0x2f8479,
-            "body": JSON.stringify(_0x41297f)
-        };
-    return tryCatchPromise(_0x3a77cc => {
-        _0x286a61(_0x3d6fd6, async (_0x10940a, _0x2890da, _0x5f1995) => {
-            if (!_0x10940a && _0x2890da.statusCode === 200) {
-                try {
-                    const _0x4f973a = JSON.parse(_0x5f1995);
-
-                    _0x3a77cc(_0x4f973a);
-                } catch (_0x27a6e2) {
-                    console.log(_0x5f1995);
-
-                    _0x3a77cc(null);
-                }
-            } else {
-                _0x3a77cc(null);
-            }
-        });
-    });
+async function _0x435ec7(_0x2c858d, _0x2332d1, _0x4b59f3, _0x5aa3cc) {
+  const _0xfd0d4c = {
+    missionCollectionId: _0x4b59f3,
+    missionId: _0x2332d1,
+    bizScene: "SSKZ",
+    extInfo: "{\"uid\":\"1899178\"}",
+    instance: "INNER",
+    instanceId: _0x5aa3cc,
+    locationInfos: "[\"{\\\"lng\\\":\\\"120.220926\\\",\\\"lat\\\":\\\"30.178582\\\"}\"]",
+    count: "1",
+    asac: "169932820075525472118"
+  };
+  let _0x52d858 = await _0x5da2a0(_0x2c858d, JSON.stringify(_0xfd0d4c), "mtop.ele.biz.growth.task.core.receiveprize", _0x24ea83, "", process.env.x5sec);
+  _0x52d858 && _0x52d858.data.rlist && console.log("完成任务");
 }
-
-async function _0x566cc1 (_0x184c2c) {
-    const _0x2809bb = new Date().getTime(),
-        _0x26b748 = {
-            "body": "{}",
-            "headers": "{}",
-            "instance": "INNER",
-            "method": "GET",
-            "options": "{\"cloudAppId\":\"47729\",\"domain\":\"https://sskz.gzppxia.com/tt_action/\",\"timeout\":3000,\"env\":\"online\",\"options\":{\"path\":\"pages/index/index\"}}",
-            "path": "elmeisv.php?method=getOpenid",
-            "protocols": "{\"Content-Type\":\"application/json\",\"mc-timestamp\":\"" + _0x2809bb + "\",\"mc-env\":\"online\"}",
-            "queryString": "{}",
-            "sdkVersion": "1.5.5"
-        },
-        _0x2c0650 = await _0x389e0e(_0x184c2c, _0x26b748);
-
-    if (_0x2c0650) {
-        return JSON.parse(_0x2c0650).openid;
-    }
+async function _0x5c575e(_0x51b2b, _0x3d9812, _0x5953dd) {
+  const _0x51bea2 = {
+    missionCollectionId: _0x5953dd,
+    missionId: _0x3d9812,
+    locationInfos: "[\"{\\\"lng\\\":\\\"120.21993197500706\\\",\\\"lat\\\":\\\"30.178378857672215\\\"}\"]",
+    bizScene: "duobao_external",
+    accountPlan: "HAVANA_COMMON",
+    count: "1",
+    asac: "2A233157IJYIGQ95WFIIFJ",
+    umiToken: "1",
+    ua: "1"
+  };
+  let _0x3eaff1 = await _0x5da2a0(_0x51b2b, JSON.stringify(_0x51bea2), "mtop.ele.biz.growth.task.core.receiveprize", _0x24ea83, "", process.env.x5sec);
+  _0x3eaff1 && _0x3eaff1.rlist && console.log("完成任务");
 }
-
-async function _0x4e7ec3 (_0x5ebbac, _0xee6b04) {
-    const _0x342272 = new Date().getTime(),
-        _0xb98c1c = {
-            "handler": "login",
-            "auth_code": _0xee6b04,
-            "attach": null,
-            "platform_id": "taoteGame2",
-            "channel_id": 1002,
-            "cver": "1.0.1",
-         
+async function _0x225d6b(_0x28c9b8, _0xad0080, _0x360139) {
+  const _0x34921e = {
+    missionCollectionId: _0xad0080,
+    missionId: _0x360139,
+    bizScene: "SSKZ",
+    instance: "INNER"
+  };
+  let _0x13cd23 = await _0x5da2a0(_0x28c9b8, JSON.stringify(_0x34921e), "mtop.ele.biz.growth.task.core.receivetask", _0x24ea83, "", process.env.x5sec);
+  if (_0x13cd23.data) {
+    return _0x13cd23.data;
+  }
+}
+async function _0x1c7fe9(_0x36170e, _0x2bc613) {
+  const _0x32eb18 = {
+    missionCollectionId: _0x2bc613,
+    locationInfos: "[\"{\\\"lng\\\":120.21993197500706,\\\"lat\\\":30.178378857672215}\"]",
+    bizScene: "SSKZ",
+    instance: "INNER"
+  };
+  let _0x385bea = await _0x5da2a0(_0x36170e, JSON.stringify(_0x32eb18), "mtop.ele.biz.growth.task.core.querytask", _0x24ea83, "", process.env.x5sec);
+  if (_0x385bea.data) {
+    return _0x385bea.data.mlist;
+  }
+}
+async function _0x137da9(_0x29d5c1, _0x1cac3f, _0xaed74f) {
+  const _0x5eecad = {
+    missionCollectionId: _0x1cac3f,
+    missionId: _0xaed74f,
+    bizScene: "SSKZ",
+    accountPlan: "KB_ORCHARD",
+    locationInfos: "[\"{\\\"lng\\\":\\\"120.21993197500706\\\",\\\"lat\\\":\\\"30.178378857672215\\\"}\"]"
+  };
+  let _0x5647f1 = await _0x5da2a0(_0x29d5c1, JSON.stringify(_0x5eecad), "mtop.ele.biz.growth.task.core.querytask", _0x24ea83, "", process.env.x5sec);
+  if (_0x5647f1.data) {
+    return _0x5647f1.data.mlist[0];
+  }
+}
+async function _0x207944(_0x341584) {
+  const _0x599a4d = await _0x2ba1e4(_0x341584);
+  for (const _0x336e26 of _0x599a4d) {
+    let _0x3fb601 = _0x336e26.missionCollectionId,
+      _0x2d4aea = _0x336e26.missionDefId;
+    if (_0x336e26.status === "FINISH") {
+      await _0x435ec7(_0x341584, _0x2d4aea, _0x3fb601, _0x336e26.id);
+    } else {
+      if (_0x336e26.actionConfig.actionType === "PAGEVIEW" && _0x336e26.status === "RUNNING") {
+        await _0x225d6b(_0x341584, _0x3fb601, _0x2d4aea);
+        let _0x57d6ce = await _0x137da9(_0x341584, _0x3fb601, _0x2d4aea);
+        if (_0x57d6ce.status === "RUNNING") {
+          await _0x56dea5(_0x341584, _0x2d4aea, _0x3fb601, _0x336e26.actionConfig.actionValue.pageSpm);
+          await _0x1e0e6b(3);
+          let _0x59f885 = await _0x1c7fe9(_0x341584, _0x3fb601);
+          for (let _0x1ef57e = 0; _0x1ef57e < _0x59f8
